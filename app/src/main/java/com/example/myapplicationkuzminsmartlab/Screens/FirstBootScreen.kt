@@ -2,6 +2,7 @@ package com.example.myapplicationkuzminsmartlab.Screens
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,15 +31,21 @@ fun FirstBootScreen(navController: NavHostController) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(color = Color.White)) {
-        Row(modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.Top,
-            horizontalArrangement = Arrangement.SpaceBetween
+        Row(
+            modifier = Modifier.padding(top = 25.dp, start = 20.dp)
+                .clickable { navController.navigate("LogScreen")
+                {
+                    popUpTo("firstBootScreen")
+                    {
+                        inclusive = true
+                    }
+                }
+                },
         ) {
             Text(
                 text = "Пропустить",
                 fontSize = 20.sp,
                 color = Color(0xFF57A9FF),
-                modifier = Modifier.padding(top = 25.dp, start = 20.dp)
             )
             Icon(
                 painter = painterResource(id = R.drawable.subtract),

@@ -24,12 +24,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.myapplicationkuzminsmartlab.ViewModel.ViewModelMain
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EmailScreen(navController: NavHostController) {
+fun EmailScreen(navController: NavHostController, viewModel: ViewModelMain) {
     val email = remember { mutableStateOf("") }
-    Column(modifier = Modifier
+    Column(
+        modifier = Modifier
         .background(Color.White)
         .padding(horizontal = 20.dp)
         .fillMaxHeight()
@@ -74,14 +76,17 @@ fun EmailScreen(navController: NavHostController) {
         )
 
         Button(
-            onClick = {navController.navigate("EnterCodeScreen")},
+            onClick = {
+                navController.navigate("EnterCodeScreen")
+                viewModel.sendCodeEmail(email.value)},
             modifier = Modifier
                 .fillMaxWidth(1f)
                 .padding(top = 40.dp)
                 .height(60.dp),
             enabled = email.value.isNotEmpty(),
             shape = RoundedCornerShape(15.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1A6FEE),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF1A6FEE),
                 disabledContentColor = Color(0xFFC9D4FB)
             ),
         ) {
@@ -101,7 +106,8 @@ fun EmailScreen(navController: NavHostController) {
             fontSize = 15.sp,
             color = Color(0xFF939396)
         )
-        Button(onClick = { /*TODO*/ },
+        Button(
+            onClick = { /*TODO*/ },
             modifier = Modifier
                 .fillMaxWidth(1f)
                 .fillMaxHeight()
